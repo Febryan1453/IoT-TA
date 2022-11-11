@@ -1,0 +1,23 @@
+#include <OneWire.h>
+#include <DallasTemperature.h>
+
+#define ONE_WIRE_BUS 8
+
+OneWire oneWire(ONE_WIRE_BUS);
+DallasTemperature sensorDS18B20(&oneWire);
+
+void setup(void)
+{
+  Serial.begin(9600);
+  sensorDS18B20.begin();
+}
+
+void loop(void)
+{
+  Serial.print("Meminta Data Suhu .......");
+  sensorDS18B20.requestTemperatures();
+
+  Serial.print("Suhu: ");
+  Serial.println(sensorDS18B20.getTempCByIndex(0));
+  delay(1000);
+}
